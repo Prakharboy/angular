@@ -32,6 +32,7 @@ import { EmployeelistService } from '../employeelist.service';
      <ul *ngFor= "let employeees of empll">
      <li>{{employeees.name}}</li>
      </ul>
+     {{errormsg}}
      
      `,
   styles: []
@@ -46,6 +47,7 @@ export class TestComponent implements OnInit {
 
   public servicecheck="";
   public empll=[];
+  public errormsg;
 
   @Input('parentData') public namej; 
   @Output() public childEvent =new EventEmitter();
@@ -56,7 +58,7 @@ export class TestComponent implements OnInit {
   ngOnInit() {
 
     this.servicecheck=this.emp.getemployeep();
-    this.emp.getad().subscribe(data=>this.empll=data);
+    this.emp.getad().subscribe(data=>this.empll=data,error=>this.errormsg=error);
   }
   public onClick()
   {
